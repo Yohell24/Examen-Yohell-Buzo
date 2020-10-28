@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.una.examen.dto.MembresiaDTO;
 import org.una.examen.repositories.IMembresiaRepository;
+import org.una.examen.utils.MapperUtils;
 import org.una.examen.utils.ServiceConvertionHelper;
+import org.una.examen.entities.Membresia;
 
 @Service
 public class MembresiaServiceImplementation implements IMembresiaService{
@@ -23,6 +25,13 @@ public class MembresiaServiceImplementation implements IMembresiaService{
     @Transactional(readOnly = true)
     public Optional<MembresiaDTO> findById(Long id) {
         return ServiceConvertionHelper.OptionalOneToOptionalDto(membresiaRepository.findById(id), MembresiaDTO.class);
+    }
+
+    @Override
+    public MembresiaDTO create(MembresiaDTO membresia) {
+        Membresia entidad = MapperUtils.EntityFromDto(membresia, Membresia.class);
+        entidad = membresiaRepository.save(entidad);
+        return MapperUtils.DtoFromEntity(entidad, MembresiaDTO.class);
     }
     
 }

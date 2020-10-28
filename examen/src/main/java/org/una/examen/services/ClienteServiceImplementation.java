@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.una.examen.dto.ClienteDTO;
 import org.una.examen.repositories.IClienteRepository;
+import org.una.examen.utils.MapperUtils;
 import org.una.examen.utils.ServiceConvertionHelper;
+import org.una.examen.entities.Cliente;
 
 @Service
 public class ClienteServiceImplementation implements IClienteService{
@@ -23,6 +25,14 @@ public class ClienteServiceImplementation implements IClienteService{
     @Transactional(readOnly = true)
     public Optional<ClienteDTO> findById(Long id) {
         return ServiceConvertionHelper.OptionalOneToOptionalDto(clienteRepository.findById(id), ClienteDTO.class);
+    }
+
+    @Override
+    @Transactional
+    public ClienteDTO create(ClienteDTO cliente) {
+        Cliente entidad = MapperUtils.EntityFromDto(cliente, Cliente.class);
+        entidad = clienteRepository.save(entidad);
+        return MapperUtils.DtoFromEntity(entidad, ClienteDTO.class);
     }
 
     

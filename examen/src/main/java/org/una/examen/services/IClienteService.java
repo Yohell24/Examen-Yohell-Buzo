@@ -11,4 +11,6 @@ import org.una.examen.dto.ClienteDTO;
 public interface IClienteService {
     
     public Optional<ClienteDTO> findById(Long id);
+    
+    public ClienteDTO create(ClienteDTO cliente);
 }

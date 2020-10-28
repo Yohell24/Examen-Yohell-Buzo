@@ -11,4 +11,6 @@ import org.una.examen.dto.MembresiaDTO;
 public interface IMembresiaService {
     
     public Optional<MembresiaDTO> findById(Long id);
+    
+    public MembresiaDTO create(MembresiaDTO membresia);
 }
