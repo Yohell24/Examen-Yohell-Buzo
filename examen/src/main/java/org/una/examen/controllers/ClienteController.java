@@ -35,6 +35,15 @@ public class ClienteController {
         }
     }
     
+    @GetMapping("/")
+    public ResponseEntity<?> findAll() {
+        try {
+            return new ResponseEntity<>(clienteService.findAll(), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/save")
     @ResponseBody

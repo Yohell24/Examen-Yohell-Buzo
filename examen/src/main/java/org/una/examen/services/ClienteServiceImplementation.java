@@ -5,6 +5,7 @@
  */
 package org.una.examen.services;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class ClienteServiceImplementation implements IClienteService{
     public Optional<ClienteDTO> findById(Long id) {
         return ServiceConvertionHelper.OptionalOneToOptionalDto(clienteRepository.findById(id), ClienteDTO.class);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<ClienteDTO>> findAll() {
+        return ServiceConvertionHelper.findList(clienteRepository.findAll(), ClienteDTO.class);
+    }
 
     @Override
     @Transactional
@@ -34,6 +41,4 @@ public class ClienteServiceImplementation implements IClienteService{
         entidad = clienteRepository.save(entidad);
         return MapperUtils.DtoFromEntity(entidad, ClienteDTO.class);
     }
-
-    
 }
