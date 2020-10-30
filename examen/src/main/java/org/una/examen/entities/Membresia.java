@@ -44,6 +44,5 @@ public class Membresia implements Serializable{
     private Integer periodicidad;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "membresia")
-    private List<CobroPendiente> cobros;
-    
+    private List<Cliente> clientes;
 }

@@ -5,6 +5,7 @@
  */
 package org.una.examen.services;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class MembresiaServiceImplementation implements IMembresiaService{
         return ServiceConvertionHelper.OptionalOneToOptionalDto(membresiaRepository.findById(id), MembresiaDTO.class);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<MembresiaDTO>> findAll() {
+        return ServiceConvertionHelper.findList(membresiaRepository.findAll(), MembresiaDTO.class);
+    }
+    
     @Override
     public MembresiaDTO create(MembresiaDTO membresia) {
         Membresia entidad = MapperUtils.EntityFromDto(membresia, Membresia.class);

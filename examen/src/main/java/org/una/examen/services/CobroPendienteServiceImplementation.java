@@ -40,5 +40,11 @@ public class CobroPendienteServiceImplementation implements ICobroPendienteServi
         entidad = cobroRepository.save(entidad);
         return MapperUtils.DtoFromEntity(entidad, CobroPendienteDTO.class);
     }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        cobroRepository.deleteAll();
+    }
     
 }

@@ -16,4 +16,6 @@ public interface ICobroPendienteService {
     public Optional<List<CobroPendienteDTO>> findByCliente(Long id);
     
     public CobroPendienteDTO create (CobroPendienteDTO cobro);
+    
+    public void deleteAll();
 }

@@ -22,5 +22,5 @@ public class MembresiaDTO {
     private Float monto;
     private String descripcion;
     private Integer periodicidad;
-    private List<CobroPendienteDTO> cobros = new ArrayList();
+    //private List<ClienteDTO> clientes = new ArrayList();
 }

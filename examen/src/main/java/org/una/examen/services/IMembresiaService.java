@@ -5,12 +5,15 @@
  */
 package org.una.examen.services;
 
+import java.util.List;
 import java.util.Optional;
 import org.una.examen.dto.MembresiaDTO;
 
 public interface IMembresiaService {
     
     public Optional<MembresiaDTO> findById(Long id);
+    
+    public Optional<List<MembresiaDTO>> findAll();
     
     public MembresiaDTO create(MembresiaDTO membresia);
 }

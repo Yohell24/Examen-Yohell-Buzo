@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,20 +44,23 @@ public class CobroPendiente implements Serializable{
     @Setter(AccessLevel.NONE)
     private Date anio;
     
-    @Column(name = "fecha_vencimiento", updatable = false)
+    @Column(name = "fecha_vencimiento", updatable = true)
     @Temporal(TemporalType.TIMESTAMP)
-    @Setter(AccessLevel.NONE)
     private Date fechaVencimiento;
     
     @Column
     private Float monto;
     
+    @Column(columnDefinition="TINYINT")
+    private Integer periodo;
+    
     @ManyToOne 
     @JoinColumn(name="cliente")
     private Cliente cliente;
     
-    @ManyToOne 
-    @JoinColumn(name="membresia")
-    private Membresia membresia;
+    @PrePersist
+    public void PrePersist(){
+        anio = new Date();
+    }
     
 }
